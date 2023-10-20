@@ -41,10 +41,10 @@ export default function Todolist() {
 
     return (
         <div className="w-screen h-screen flex flex-col items-center justify-center bg-slate-50">
-            <div className="w-5/6 max-w-lg">
+            <div className="w-11/12 max-w-lg">
                 <h1 className="text-center p-4 m-4 font-mono uppercase font-bold text-2xl">Todolist</h1>
                 <div className="flex items-center mx-4">
-                    <label className="relative md:flex-1">
+                    <label className="relative flex-1">
                         <input type="text" id="add-input" 
                         className="w-full border-2 border-slate-950 p-2 outline-none rounded-md focus:border-sky-400 transition-all duration-300 ease-in-out peer"
                         onKeyDown={(e) => {
@@ -168,6 +168,7 @@ function Todo(props: todoProps) {
                 <div>
                     <button
                     onClick={(e) => {
+                        e.stopPropagation()
                         e.preventDefault()
                         const dialog: HTMLDialogElement = document.querySelector(`#dialog-${props.id}`)!
                         if (dialog.open) {
@@ -179,9 +180,9 @@ function Todo(props: todoProps) {
                         <DotsThree size={32} weight="bold" />
                     </button>
                     <dialog id={"dialog-"+props.id} 
-                    className="w-40 flex flex-col">
+                    className="w-40 p-1 translate-x-16 translate-y-2 rounded-md bg-slate-50 shadow-[0_0_8px_0_rgba(0,0,0,0.25)]">
                         <button
-                        className="mx-4 p-2 rounded-md hover:bg-emerald-500 hover:text-slate-50 transition-all duration-300 ease-in-out"
+                        className="w-full p-2 mb-1 rounded-md bg-slate-200 transition-all duration-300 ease-in-out"
                         onClick={(e) => {
                             e.preventDefault()
                             const content: HTMLInputElement = document.querySelector(`#span-${props.id}`)!
@@ -191,7 +192,7 @@ function Todo(props: todoProps) {
                         }}>
                             {
                                 inputDisabled ?
-                                <div className="flex">
+                                <div className="w-full flex">
                                     <span className="flex-1">edit</span>
                                     <PencilSimple size={28} weight="bold" />
                                 </div> :
@@ -202,7 +203,7 @@ function Todo(props: todoProps) {
                             }
                         </button>
                         <button
-                        className="flex mx-4 p-2 rounded-md hover:bg-rose-500 hover:text-slate-50 transition-all duration-300 ease-in-out"
+                        className="w-full flex p-2 rounded-md bg-slate-200 transition-all duration-300 ease-in-out"
                         onClick={(e) => {
                             e.preventDefault()
                             if (props.delete) {
